@@ -1,37 +1,44 @@
-# Trabalho De Conclusão De Curso
+<h1 align="center">PROPOSTA DE TRABALHO DE CONCLUSÃO DE CURSO (TCC)</h1>
 
 ## Links Uteis
 [TCC JeanLuca](http://repositorio.unesc.net/bitstream/1/8859/1/Jeanluca%20Fernandes%20Pereira.pdf)
 
-<h2 align="center">PROPOSTA DE TRABALHO DE CONCLUSÃO DE CURSO (TCC)</h2>
 
+<h2 align="center">IDENTIFICAÇÕES</h2>
 
-
-
-### 1.	IDENTIFICAÇÕES
-
-*ALUNO*
+### *ALUNO*
 NOME: 
+
 FASE:
+
 TELEFONE RESIDENCIAL:
+
 TELEFONE CELULAR:
+
 E-MAIL:
 
-*PROFESSOR ORIENTADOR*
+### *PROFESSOR ORIENTADOR*
+
 NOME: 
+
 DEPARTAMENTO: CIÊNCIA DA COMPUTAÇÃO
+
 E-MAIL:
 
-*PROFESSOR CO-ORIENTADOR*
+### *PROFESSOR CO-ORIENTADOR*
+
 NOME: 
+
 DEPARTAMENTO:
+
 E-MAIL:
 
 Área: 
+
 Orientador: 
 
 
-## 2.	PROPOSTA DE TCC
+<h2 align="center">PROPOSTA DE TCC</h2>
 
 *TÍTULO DO PROJETO*
 
@@ -81,13 +88,16 @@ Orientador:
 
 
 
-### 3. ASSINATURAS
+<h2 align="center">ASSINATURAS</h2>
 
 ALUNO:
+
 DATA:
 
 PROFESSOR ORIENTADOR:
+
 DATA:
 
 PROFESSOR CO - ORIENTADOR:
+
 DATA:
