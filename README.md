@@ -1,29 +1,25 @@
 <h1 align="center">PROPOSTA DE TRABALHO DE CONCLUSÃO DE CURSO (TCC)</h1>
 
-## Links Uteis
-[TCC JeanLuca](http://repositorio.unesc.net/bitstream/1/8859/1/Jeanluca%20Fernandes%20Pereira.pdf)
-
-
 <h2 align="center">IDENTIFICAÇÕES</h2>
 
 ### *ALUNO*
-NOME: 
+NOME: Augusto Savi
 
-FASE:
+FASE: 7ª fase
 
 TELEFONE RESIDENCIAL:
 
-TELEFONE CELULAR:
+TELEFONE CELULAR: (48) 998685622
 
-E-MAIL:
+E-MAIL: guto_savi@outlook.com
 
 ### *PROFESSOR ORIENTADOR*
 
-NOME: 
+NOME: Giácomo Antônio Althoff Bolan
 
 DEPARTAMENTO: CIÊNCIA DA COMPUTAÇÃO
 
-E-MAIL:
+E-MAIL: kinhobolan@live.com
 
 ### *PROFESSOR CO-ORIENTADOR*
 
