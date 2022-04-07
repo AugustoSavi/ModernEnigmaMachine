@@ -2,6 +2,9 @@
 
 <h2 align="center">IDENTIFICAÇÕES</h2>
 
+pesquisar: 
+Yubico
+
 ### *ALUNO*
 NOME: Augusto Savi
 
@@ -45,7 +48,7 @@ Orientador:
 
 
 *DEFINIÇÃO DO PROBLEMA*
-
+ fazer primeiro
 
 
 *OBJETIVO GERAL*
