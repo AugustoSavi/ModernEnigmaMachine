@@ -5,6 +5,14 @@
 pesquisar: 
 Yubico
 
+links poc:
+
+https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries
+
+https://forum.arduino.cc/t/liquidcrystal_i2c-arduino-due/519260
+
+http://www.armlearning.com/code/arduino-due/arduino-due-i2c-lcd-example.php#google_vignette
+
 ### *ALUNO*
 NOME: Augusto Savi
 
