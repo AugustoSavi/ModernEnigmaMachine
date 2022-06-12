@@ -1,31 +1,9 @@
-/*
-  Arduino Programs Blink
+#include <Keyboard.h>
+#include <PS2Keyboard.h>
 
-  This sketch demonstrates the Keyboard library.
 
-  For Leonardo and Due boards only.
-
-  When you connect pin 2 to ground, it creates a new window with a key
-  combination (CTRL-N), then types in the Blink sketch, then auto-formats the
-  text using another key combination (CTRL-T), then uploads the sketch to the
-  currently selected Arduino using a final key combination (CTRL-U).
-
-  Circuit:
-  - Arduino Leonardo, Micro, Due, LilyPad USB, or Yún
-  - wire to connect D2 to ground
-
-  created 5 Mar 2012
-  modified 29 Mar 2012
-  by Tom Igoe
-  modified 3 May 2014
-  by Scott Fitzgerald
-
-  This example is in the public domain.
-
-  https://www.arduino.cc/en/Tutorial/BuiltInExamples/KeyboardReprogram
-*/
-
-#include "Keyboard.h"
+const int DataPin = 2;
+const int IRQpin =  3;
 
 // use this option for OSX.
 // Comment it out if using Windows or Linux:
@@ -34,35 +12,54 @@
 // leave commented out if using OSX:
 char ctrlKey = KEY_LEFT_CTRL;
 
+PS2Keyboard externalKeyboard;
+
 
 void setup() {
+  delay(5000);
+  
   // initialize control over the keyboard:
   Keyboard.begin();
+  
+  externalKeyboard.begin(DataPin, IRQpin);
+
+  Serial.begin(9600);
+  Serial.println("Keyboard Test:");
 }
 
 void loop() {
-  delay(1000);
-  Keyboard.press(ctrlKey);
-  Keyboard.press('a');
-  delay(500);
-  Keyboard.releaseAll();
-  // delete the selected text
-  Keyboard.write(KEY_BACKSPACE);
-  delay(500);
-  // Type out "blink":
-  Keyboard.println("void setup() {");
-  Keyboard.println("pinMode(13, OUTPUT);");
-  Keyboard.println("}");
-  Keyboard.println();
-  Keyboard.println("void loop() {");
-  Keyboard.println("digitalWrite(13, HIGH);");
-  Keyboard.print("delay(3000);");
-  // make it 1000 instead:
-  Keyboard.println("1000);");
-  Keyboard.println("digitalWrite(13, LOW);");
-  Keyboard.println("delay(1000);");
-  Keyboard.println("}");
-  Keyboard.releaseAll();
-  // wait for the sweet oblivion of reprogramming:
-  while (true);
+  if (externalKeyboard.available()) {
+    
+    // read the next key
+    char c = externalKeyboard.read();
+    
+    // check for some of the special keys
+    if (c == PS2_ENTER) {
+      Serial.println();
+    } else if (c == PS2_TAB) {
+      Serial.print("[Tab]");
+    } else if (c == PS2_ESC) {
+      Serial.print("[ESC]");
+    } else if (c == PS2_PAGEDOWN) {
+      Serial.print("[PgDn]");
+    } else if (c == PS2_PAGEUP) {
+      Serial.print("[PgUp]");
+    } else if (c == PS2_LEFTARROW) {
+      Serial.print("[Left]");
+    } else if (c == PS2_RIGHTARROW) {
+      Serial.print("[Right]");
+    } else if (c == PS2_UPARROW) {
+      Serial.print("[Up]");
+      Keyboard.println("teste");
+      Keyboard.releaseAll();
+    } else if (c == PS2_DOWNARROW) {
+      Serial.print("[Down]");
+    } else if (c == PS2_DELETE) {
+      Serial.print("[Del]");
+    } else {
+      
+      // otherwise, just print all normal characters
+      Serial.println(c);
+    }
+  }
 }
