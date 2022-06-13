@@ -1,7 +1,7 @@
 import serial
 import pyautogui
 
-ser = serial.Serial('/dev/ttyUSB1', 115200, timeout = 1) # ttyACM1 for Arduino board
+ser = serial.Serial('/dev/ttyUSB0', 115200, timeout = 1) # ttyACM1 for Arduino board
 
 readOut = ''
 
@@ -15,6 +15,8 @@ while True:
             # print(readOut)
             if readOut == "[ESC]":
                 pyautogui.press('esc')
+            elif readOut == "[Enter]":
+                pyautogui.press('enter')
             elif readOut == "[PgDn]":
                 pyautogui.press('pgdn')
             elif readOut == "[PgUp]":
