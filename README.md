@@ -29,9 +29,11 @@ Yubico
 
 https://www.hackeduca.com.br/ligando-um-teclado-ps2-ao-arduino/
 
-
 ### teclas pyautogui
 https://pyautogui.readthedocs.io/en/latest/keyboard.html#keyboard-keys
 ### display lcd ic2
 
 https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library
+
+### icon
+https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
