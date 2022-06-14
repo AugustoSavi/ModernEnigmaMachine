@@ -1,133 +1,99 @@
 # Import the required libraries
 from tkinter import *
-from tkinter import ttk, messagebox
-from click import command
+from tkinter import ttk
 from pystray import MenuItem as item
 from PIL import Image
-import pystray, serial, pyautogui, multiprocessing
-import serial.tools.list_ports
+import pystray, multiprocessing
 
-serialPort = None
-serialPorts = serial.tools.list_ports.comports()
-
-serialPortInput = ''
-serialPortOut = '[DECODE]'
-programModeOut = '[MODE]'
-
-def listenSerialPort():
-    print ("Listining serial port")
-    while True:
-        try:
-            serialPortInput = serialPort.readline().decode('ascii')
-            if(serialPortInput):
-                # print(serialPortInput)
-                if serialPortInput == "[ESC]":
-                    pyautogui.press('esc')
-                elif serialPortInput == "[Enter]":
-                    pyautogui.press('enter')
-                elif serialPortInput == "[PgDn]":
-                    pyautogui.press('pgdn')
-                elif serialPortInput == "[PgUp]":
-                    pyautogui.press('pgup')
-                elif serialPortInput == "[Left]":
-                    pyautogui.press('left')
-                elif serialPortInput == "[Right]":
-                    pyautogui.press('right')
-                elif serialPortInput == "[Up]":
-                    pyautogui.press('up')
-                elif serialPortInput == "[Down]":
-                    pyautogui.press('down')
-                elif serialPortInput == "[Del]":
-                    pyautogui.press('backspace')
-                else:
-                    pyautogui.write(serialPortInput)
-        except:
-            pass
-        # serialPort.flush()
+from Arduino import Arduino
+arduino = Arduino()
 
 # Create an instance of tkinter frame or window
-win=Tk()
-# Title windown
-win.title("Modern Enigma Machine")
-# Set the size of the window
-win.geometry("720x360")
-# não pode fazer o resize da tela
-win.resizable(False,False)
+root = Tk()
+class Application():
 
-# select da porta do arduino
-selectSerialPort = ttk.Combobox(win, values=serialPorts)
-selectSerialPort.place ( relx = 0.02, rely = 0.05, width = 250, height = 20)
-selectSerialPort.current(0)
+    def __init__(self):
+        self.root = root
+        self.tela()
+        self.inputs()
+        self.buttons()
+        self.initListener()
+        root.protocol('WM_DELETE_WINDOW', self.hide_window)
+        root.mainloop()
 
-def callbackFunc(event):
-    connectSerialPort()
+    def tela(self):
+        # Title windown
+        self.root.title("Modern Enigma Machine")
+        # Set the size of the window
+        self.root.geometry("720x360")
+        # não pode fazer o resize da tela
+        self.root.resizable(False, False)
 
-selectSerialPort.bind("<<ComboboxSelected>>", callbackFunc)
+    def buttons(self):
+        # select da porta do arduino
+        self.selectSerialPort = ttk.Combobox(self.root, values=arduino.serialPorts)
+        self.selectSerialPort.place(relx=0.02, rely=0.05, width=250, height=20)
+        self.selectSerialPort.current(0)
+        self.selectSerialPort.bind("<<ComboboxSelected>>", self.callbackFunctionPort(self.selectSerialPort.get()))
 
-# select da modo do programa
-programMode = ttk.Combobox(win, values=['Normal Keyboard','encrypt','decrypt'])
-programMode.place ( relx = 0.4, rely = 0.05, width = 250, height = 20)
-programMode.current(0)
+        # select da modo do programa
+        self.programModeButton = ttk.Combobox(self.root, values=arduino.programModes)
+        self.programModeButton.place(relx=0.4, rely=0.05, width=250, height=20)
+        self.programModeButton.current(0)
+        self.programModeButton.bind("<<ComboboxSelected>>", self.callbackFunctionMode)
 
-def callbackFunctionMode(event):
-    if programMode.get() == 'Normal Keyboard':
-        sendToSerial(programModeOut+str(0))
-    elif programMode.get() == 'Encrypt':
-        sendToSerial(programModeOut+str(1))
-    elif programMode.get() == 'Decrypt':
-        sendToSerial(programModeOut+str(2))
-        
+        # button send to serial
+        self.buttonSend = Button(self.root,
+                                 text='Send',
+                                 command=self.callbackFunctionSendTextToDecrypt)
+        self.buttonSend.place(relx=0.02, rely=0.9, width=695, height=30)
 
-programMode.bind("<<ComboboxSelected>>", callbackFunctionMode)
+    def inputs(self):
+        # text para mandar para o arduino
+        self.textBox = Text(self.root, height=15, width=86)
+        self.textBox.place(relx=0.02, rely=0.15)
 
+    def callbackFunctionPort(self, port):
+        arduino.connectSerialPort(port)
 
-# text para mandar para o arduino
-textBox = Text(win,height = 15, width = 86)
-textBox.place(relx = 0.02, rely = 0.15)
+    def callbackFunctionMode(self, event):
+        mode = self.programModeButton.get()
+        print("mode: "+ mode)
+        if mode == arduino.programModes[0]:
+            arduino.sendModeToSerial(str(0))
+        elif mode == arduino.programModes[1]:
+            arduino.sendModeToSerial(str(1))
+        elif mode == arduino.programModes[2]:
+            arduino.sendModeToSerial(str(2))
 
-# botão de enviar o texto da caixa para o Arduino
-def sendTextToSerial():
-    sendToSerial(serialPortOut + textBox.get('1.0', END))
+    def callbackFunctionSendTextToDecrypt(self):
+        arduino.sendTextToDecryptSerial(self.textBox.get('1.0', END))
 
-buttonSend = Button(win, text = 'Send', command= sendTextToSerial)
-buttonSend.place ( relx = 0.02, rely = 0.9, width = 695, height = 30)
+    # Define a function for quit the window
+    def quit_window(self, icon):
+        if self.startThreading.is_alive():
+            self.startThreading.terminate()
 
-def sendToSerial(message):
-    serialPort.write(message.encode())
+        icon.stop()
+        self.root.destroy()
 
-# Define a function for quit the window
-def quit_window(icon):
-    global startThreading
-    if startThreading.is_alive():
-        startThreading.terminate()
+    # Define a function to show the window again
+    def show_window(self, icon):
+        icon.stop()
+        self.root.after(0, self.root.deiconify())
 
-    icon.stop()
-    win.destroy()
+    # Hide the window and show on the system taskbar
+    def hide_window(self):
+        self.root.withdraw()
+        image = Image.open("hidden.ico")
+        menu = (item('Quit', self.quit_window),
+                item('Send text to decrypt', self.show_window))
+        icon = pystray.Icon("hidden", image, "Enigma Machine", menu)
+        icon.run()
 
-# Define a function to show the window again
-def show_window(icon):
-   icon.stop()
-   win.after(0,win.deiconify())
+    def initListener(self):
+        arduino.connectSerialPort(self.selectSerialPort.get())
+        self.startThreading = multiprocessing.Process(target=arduino.listenSerialPort)
+        self.startThreading.start()
 
-# Hide the window and show on the system taskbar
-def hide_window():
-   win.withdraw()
-   image=Image.open("hidden.ico")
-   menu=(item('Quit', quit_window), item('Send text to decrypt', show_window))
-   icon=pystray.Icon("hidden", image, "Enigma Machine", menu)
-   icon.run()
-
-win.protocol('WM_DELETE_WINDOW', hide_window)
-
-def connectSerialPort():
-    try:
-        global serialPort
-        serialPort = serial.Serial(selectSerialPort.get().split('-')[0].strip(), 115200, timeout = 1) # ttyACM1 for Arduino board
-    except FileNotFoundError as error:
-        messagebox.showerror("Error", error)
-
-connectSerialPort()
-startThreading = multiprocessing.Process(target=listenSerialPort)
-startThreading.start()
-
-win.mainloop()
+Application()
