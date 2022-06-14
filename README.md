@@ -47,6 +47,10 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [x] Refatorar programa python
 - [x] criar banner repo git
 - [ ] permitir scrollar no visor (permitir voltar)
+- [ ] selecionar criptografia
+- [ ] criptografar mensagem no modo encrypt
+- [ ] descriptografar mensagem no modo decrypt
+- [ ] colocar todos os comentarios e variaveis em inglês
 
 ### bugs a serem resolvidos
 - [x] troca de modo do programa
