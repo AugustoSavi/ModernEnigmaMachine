@@ -51,3 +51,4 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 ### bugs a serem resolvidos
 - [x] troca de modo do programa
 - [x] decrypt not working
+- [ ] Quando clica varias vezes rapidamente esta escrevendo o texto invés de realizar a ação
