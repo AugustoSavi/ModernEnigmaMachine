@@ -1,3 +1,6 @@
+<img align="center" src="https://user-images.githubusercontent.com/32443720/173478468-a98c009d-7497-412f-b76c-0ee08abb41a4.png"/>
+
+
 <h1 align="center">PROPOSTA DE TRABALHO DE CONCLUSÃO DE CURSO (TCC)</h1>
 
 <h2 align="center">PITCH</h2>
