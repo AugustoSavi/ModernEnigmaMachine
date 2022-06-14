@@ -42,7 +42,8 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [x] Renomear repo
 - [x] Tornar publico
 - [x] Refatorar programa python
-- [] criar banner repo git
+- [x] criar banner repo git
+- [ ] permitir scrollar no visor (permitir voltar)
 
 ### bugs a serem resolvidos
 - [x] troca de modo do programa
