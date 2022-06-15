@@ -30,9 +30,9 @@
 LiquidCrystal_I2C lcd(I2C_ADDR,16,2);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 PS2Keyboard keyboard;
 
-const int DataPin = 2;
-const int IRQpin =  3;
+const int DataPin = 2, IRQpin =  3;
 String message = "", messagemInput = "";
+const char* str;
 
 /*
 normal: 0
@@ -133,6 +133,8 @@ void encrypt() {
       // otherwise, just print all normal characters
     // check for some of the special keys
     if (c == PS2_ENTER) {
+      str = message.c_str();
+      rot47(str);
       Serial.print(message);
     } 
      else if (c == PS2_ESC) {
@@ -163,7 +165,9 @@ void encrypt() {
 
 void decryptMessage(String message){
   lcd.clear();
-  printLCD(message);
+  str = message.c_str();
+  rot47(str);
+  printLCD(str);
 }
 
 void printLCD(String message) {
@@ -190,4 +194,17 @@ void showMessageLcd(String message){
   printLCD(message);
   delay(1000);
   lcd.clear();
+}
+
+char rot47(char *s)
+{
+  char *p = s;
+  while (*p) {
+    if (*p >= '!' && *p <= 'O')
+      *p = ((*p + 47) % 127);
+    else if (*p >= 'P' && *p <= '~')
+      *p = ((*p - 47) % 127);
+    p++;
+  }
+  return s;
 }
