@@ -50,9 +50,10 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [ ] selecionar criptografia
 - [ ] criptografar mensagem no modo encrypt
 - [ ] descriptografar mensagem no modo decrypt
-- [ ] colocar todos os comentarios e variaveis em inglês
+- [x] colocar todos os comentarios e variaveis em inglês
+- [ ] fazer comandos compinados funcionar (ctral+a)
 
 ### bugs a serem resolvidos
 - [x] troca de modo do programa
 - [x] decrypt not working
-- [ ] Quando clica varias vezes rapidamente esta escrevendo o texto invés de realizar a ação
+- [x] Quando clica varias vezes rapidamente esta escrevendo o texto invés de realizar a ação

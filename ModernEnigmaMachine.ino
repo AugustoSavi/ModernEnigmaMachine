@@ -39,7 +39,7 @@ normal: 0
 encrypt: 1
 decrypt: 2
 */
-int modeProgram = 2;
+int modeProgram = 0;
 
 
 void setup() {
@@ -115,7 +115,7 @@ void normalKeyboard() {
     } else if (c == PS2_DOWNARROW) {
       Serial.print("[Down]");
     } else if (c == PS2_DELETE) {
-      Serial.print("[Del]");
+      Serial.print("[Backspace]");
     } else if (c == PS2_F1) {
       Serial.print("[F1]");
     } 
