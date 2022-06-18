@@ -6,7 +6,10 @@ from PIL import Image
 import pystray, multiprocessing
 
 from Arduino import Arduino
+
 arduino = Arduino()
+
+
 class Application():
 
     def __init__(self):
@@ -25,21 +28,27 @@ class Application():
 
     def buttons(self):
         # select arduino port
-        self.selectSerialPort = ttk.Combobox(self.root, values=arduino.serialPorts)
+        self.selectSerialPort = ttk.Combobox(self.root,
+                                             values=arduino.serialPorts)
         self.selectSerialPort.place(relx=0.02, rely=0.05, width=250, height=20)
         self.selectSerialPort.current(0)
-        self.selectSerialPort.bind("<<ComboboxSelected>>", self.callbackFunctionPort(self.selectSerialPort.get()))
+        self.selectSerialPort.bind(
+            "<<ComboboxSelected>>",
+            self.callbackFunctionPort(self.selectSerialPort.get()))
 
         # select the mode
-        self.programModeButton = ttk.Combobox(self.root, values=arduino.programModes)
+        self.programModeButton = ttk.Combobox(self.root,
+                                              values=arduino.programModes)
         self.programModeButton.place(relx=0.4, rely=0.05, width=250, height=20)
         self.programModeButton.current(0)
-        self.programModeButton.bind("<<ComboboxSelected>>", self.callbackFunctionMode)
+        self.programModeButton.bind("<<ComboboxSelected>>",
+                                    self.callbackFunctionMode)
 
         # button
-        self.buttonSend = Button(self.root,
-                                 text='Send',
-                                 command=self.callbackFunctionSendTextToDecrypt)
+        self.buttonSend = Button(
+            self.root,
+            text='Send',
+            command=self.callbackFunctionSendTextToDecrypt)
         self.buttonSend.place(relx=0.02, rely=0.9, width=695, height=30)
 
     # input text to send to Arduino
@@ -79,14 +88,15 @@ class Application():
     def hide_window(self):
         self.root.withdraw()
         image = Image.open("hidden.ico")
-        menu = (item('Quit', self.quit_window),
-                item('Open', self.show_window))
+        menu = (item('Quit', self.quit_window), item('Open', self.show_window))
         icon = pystray.Icon("hidden", image, "Enigma Machine", menu)
         icon.run()
 
     def initListener(self):
         arduino.connectSerialPort(self.selectSerialPort.get())
-        self.startThreading = multiprocessing.Process(target=arduino.listenSerialPort)
+        self.startThreading = multiprocessing.Process(
+            target=arduino.listenSerialPort)
         self.startThreading.start()
+
 
 Application()
