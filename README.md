@@ -28,6 +28,12 @@ porem no caso de quem recebe a mensagem existiria um programa em que você cola 
 
 Yubico
 
+keyscrambler
+
+https://www.techtudo.com.br/noticias/2011/06/novo-teclado-sem-fio-da-microsoft-com-sistema-de-criptografia.ghtml
+
+https://forum.adrenaline.com.br/threads/review-teclado-mecanico-wireless-matias-secure-pro.527253/
+
 ### keyMap abnt2 
 
 https://www.hackeduca.com.br/ligando-um-teclado-ps2-ao-arduino/
@@ -46,14 +52,9 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [x] Tornar publico
 - [x] Refatorar programa python
 - [x] criar banner repo git
-- [x] permitir scrollar no visor (permitir voltar)
-- [x] selecionar criptografia (rot47)
-- [x] criptografar mensagem no modo encrypt
-- [x] descriptografar mensagem no modo decrypt
-- [x] colocar todos os comentarios e variaveis em inglês
+- [ ] permitir scrollar no visor (permitir voltar)
+- [ ] selecionar criptografia (rot47)
+- [ ] criptografar mensagem no modo encrypt
+- [ ] descriptografar mensagem no modo decrypt
+- [ ] colocar todos os comentarios e variaveis em inglês
 - [ ] fazer comandos compinados funcionar (ctrl + a)
-
-### bugs a serem resolvidos
-- [x] troca de modo do programa
-- [x] decrypt not working
-- [x] Quando clica varias vezes rapidamente esta escrevendo o texto invés de realizar a ação
