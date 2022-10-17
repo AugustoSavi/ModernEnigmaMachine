@@ -1,5 +1,16 @@
 <img align="center" src="https://user-images.githubusercontent.com/32443720/173478468-a98c009d-7497-412f-b76c-0ee08abb41a4.png"/>
 
+<h2 align="center">Versão 1 funcional</h2>
+
+![WhatsApp Image 2022-10-17 at 19 39 39](https://user-images.githubusercontent.com/32443720/196297172-9dbef4b7-01c0-4d2c-a54f-4283fcf06066.jpeg)
+
+<h2 align="center">Versão 2 sendo construida</h2>
+
+![20221006_002124](https://user-images.githubusercontent.com/32443720/196296975-0958eafe-7150-4eb9-bbb1-8e1962529ded.jpg)
+
+![20221002_005254](https://user-images.githubusercontent.com/32443720/196297288-4ea1ee3e-e428-42bd-89d1-8bbc81499b90.jpg)
+
+
 
 <h1 align="center">PROPOSTA DE TRABALHO DE CONCLUSÃO DE CURSO (TCC)</h1>
 
