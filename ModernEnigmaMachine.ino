@@ -181,6 +181,7 @@ void encrypt()
       rot47(str);
       Serial.print(message);
       message = "";
+      lcd.clear();
     }
     else if (c == PS2_LEFTARROW)
     {
