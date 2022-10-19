@@ -33,16 +33,13 @@ HIDBoot<USB_HID_PROTOCOL_KEYBOARD>    HidKeyboard(&Usb);
 int modeProgram = 0, scroll = 0;
 String message = "", messagemInput = "";
 const char *str;
-char character;
+char character = '\0';
 
 class KbdRptParser : public KeyboardReportParser {
-  
+
   protected:
-    void OnControlKeysChanged(uint8_t before, uint8_t after);
-
     void OnKeyDown	(uint8_t mod, uint8_t key);
-    void OnKeyPressed(uint8_t key);
-
+//    void OnKeyPressed(uint8_t key);
 };
 
 KbdRptParser Prs;
@@ -50,60 +47,22 @@ KbdRptParser Prs;
 void KbdRptParser::OnKeyDown(uint8_t mod, uint8_t key)
 {
   uint8_t c = OemToAscii(mod, key);
-//  Serial.println(key);
-
-  if (c) {
-    OnKeyPressed(c);
+  if (c && modeProgram == 0) {
+    Serial.print((char)c);
   }
 }
 
-void KbdRptParser::OnControlKeysChanged(uint8_t before, uint8_t after) {
-
-  MODIFIERKEYS beforeMod;
-  *((uint8_t*)&beforeMod) = before;
-
-  MODIFIERKEYS afterMod;
-  *((uint8_t*)&afterMod) = after;
-
-  if (beforeMod.bmLeftCtrl != afterMod.bmLeftCtrl) {
-    Serial.println("LeftCtrl changed");
-  }
-  if (beforeMod.bmLeftShift != afterMod.bmLeftShift) {
-    Serial.println("LeftShift changed");
-  }
-  if (beforeMod.bmLeftAlt != afterMod.bmLeftAlt) {
-    Serial.println("LeftAlt changed");
-  }
-  if (beforeMod.bmLeftGUI != afterMod.bmLeftGUI) {
-    Serial.println("LeftGUI changed");
-  }
-  if (beforeMod.bmRightCtrl != afterMod.bmRightCtrl) {
-    Serial.println("RightCtrl changed");
-  }
-  if (beforeMod.bmRightShift != afterMod.bmRightShift) {
-    Serial.println("RightShift changed");
-  }
-  if (beforeMod.bmRightAlt != afterMod.bmRightAlt) {
-    Serial.println("RightAlt changed");
-  }
-  if (beforeMod.bmRightGUI != afterMod.bmRightGUI) {
-    Serial.println("RightGUI changed");
-  }
-
-}
-
-void KbdRptParser::OnKeyPressed(uint8_t key)
-{
-//  Serial.println((char)key);
-  character = (char)key;
-};
+//void KbdRptParser::OnKeyPressed(uint8_t key)
+//{
+//  character = (char)key;
+//};
 
 void setup()
 {
   Serial.begin( 115200 );
-  #if !defined(__MIPSEL__)
-    while (!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
-  #endif
+#if !defined(__MIPSEL__)
+  while (!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
+#endif
   Serial.println("Start");
 
   if (Usb.Init() == -1)
@@ -123,6 +82,33 @@ void setup()
 void loop()
 {
   Usb.Task();
+//  verifyCharacter();
+  
+  if (Serial.available() > 0)
+  {
+    messagemInput = Serial.readString();
+    printLCD(messagemInput);
+    if (messagemInput.substring(0, 6) == "[MODE]")
+    {
+      modeProgram = messagemInput.substring(6, 7).toInt();
+      showMode();
+    }
+    if (messagemInput.substring(0, 8) == "[DECODE]" && modeProgram == 2)
+    {
+      decryptMessage(messagemInput.substring(8, messagemInput.length() - 1));
+    }
+    if (modeProgram == 2)
+    {
+      scrollKeyboard();
+    }
+  }
+}
+
+void verifyCharacter(){
+  if (character != '\0'){
+    Serial.print(character);
+    character = '\0';
+  }
 }
 
 void showMode()
@@ -145,116 +131,53 @@ void showMode()
   }
 }
 
-void normalKeyboard(char c)
-{
-  Serial.print(c);
-  
-//  if (keyboard.available())
-//  {
-//
-//    // read the next key
-//    char c = keyboard.read();
-//
-//    // check for some of the special keys
-//    if (c == PS2_ENTER)
-//    {
-//      Serial.print("[Enter]");
-//    }
-//    else if (c == PS2_TAB)
-//    {
-//      Serial.print("[Tab]");
-//    }
-//    else if (c == PS2_ESC)
-//    {
-//      Serial.print("[ESC]");
-//    }
-//    else if (c == PS2_PAGEDOWN)
-//    {
-//      Serial.print("[PgDn]");
-//    }
-//    else if (c == PS2_PAGEUP)
-//    {
-//      Serial.print("[PgUp]");
-//    }
-//    else if (c == PS2_LEFTARROW)
-//    {
-//      Serial.print("[Left]");
-//    }
-//    else if (c == PS2_RIGHTARROW)
-//    {
-//      Serial.print("[Right]");
-//    }
-//    else if (c == PS2_UPARROW)
-//    {
-//      Serial.print("[Up]");
-//    }
-//    else if (c == PS2_DOWNARROW)
-//    {
-//      Serial.print("[Down]");
-//    }
-//    else if (c == PS2_DELETE)
-//    {
-//      Serial.print("[Backspace]");
-//    }
-//    else if (c == PS2_F1)
-//    {
-//      Serial.print("[F1]");
-//    }
-//    else
-//    {
-//      // otherwise, just print all normal characters
-//      Serial.print(c);
-//    }
-//  }
-}
-
 void encrypt()
 {
-    // otherwise, just print all normal characters
-    // check for some of the special keys
-//    if (c == PS2_ENTER)
-//    {
-//      str = message.c_str();
-//      rot47(str);
-//      Serial.print(message);
-//      message = "";
-//    }
-//    else if (c == PS2_LEFTARROW)
-//    {
-//      setScrollNumber(-1, message.length());
-//    }
-//    else if (c == PS2_RIGHTARROW)
-//    {
-//      setScrollNumber(1, message.length());
-//    }
-//    else if (c == PS2_DELETE)
-//    {
-//      if (message.length() > 0)
-//      {
-//        message = message.substring(0, message.length() - 1);
-//        lcd.clear();
-//      }
-//    }
-//    else
-//    {
-//      // otherwise, just print all normal characters
-//      message += c;
-//    }
-//  }
+  // otherwise, just print all normal characters
+  // check for some of the special keys
+  //    if (c == PS2_ENTER)
+  //    {
+  //      str = message.c_str();
+  //      rot47(str);
+  //      Serial.print(message);
+  //      message = "";
+  //    }
+  //    else if (c == PS2_LEFTARROW)
+  //    {
+  //      setScrollNumber(-1, message.length());
+  //    }
+  //    else if (c == PS2_RIGHTARROW)
+  //    {
+  //      setScrollNumber(1, message.length());
+  //    }
+  //    else if (c == PS2_DELETE)
+  //    {
+  //      if (message.length() > 0)
+  //      {
+  //        message = message.substring(0, message.length() - 1);
+  //        lcd.clear();
+  //      }
+  //    }
+  //    else
+  //    {
+  //      // otherwise, just print all normal characters
+  //      message += c;
+  //    }
+  //  }
 }
 
 void scrollKeyboard()
 {
-    // otherwise, just print all normal characters
-    // check for some of the special keys
-//    if (c == PS2_LEFTARROW)
-//    {
-//      setScrollNumber(-1, message.length());
-//    }
-//    else if (c == PS2_RIGHTARROW)
-//    {
-//      setScrollNumber(1, message.length());
-//    }
+  // otherwise, just print all normal characters
+  // check for some of the special keys
+  //    if (c == PS2_LEFTARROW)
+  //    {
+  //      setScrollNumber(-1, message.length());
+  //    }
+  //    else if (c == PS2_RIGHTARROW)
+  //    {
+  //      setScrollNumber(1, message.length());
+  //    }
 }
 
 void setScrollNumber(int number, int lengthString)
@@ -310,20 +233,20 @@ void decryptMessage(String message)
 {
   lcd.clear();
   str = message.c_str();
-//  rot47(str);
+  rot47(str);
   printLCD(str);
 }
 
-//char rot47(char *s)
-//{
-//  char *p = s;
-//  while (*p)
-//  {
-//    if (*p >= '!' && *p <= 'O')
-//      *p = ((*p + 47) % 127);
-//    else if (*p >= 'P' && *p <= '~')
-//      *p = ((*p - 47) % 127);
-//    p++;
-//  }
-//  return s;
-//}
+char rot47(char *s)
+{
+  char *p = s;
+  while (*p)
+  {
+    if (*p >= '!' && *p <= 'O')
+      *p = ((*p + 47) % 127);
+    else if (*p >= 'P' && *p <= '~')
+      *p = ((*p - 47) % 127);
+    p++;
+  }
+  return s;
+}

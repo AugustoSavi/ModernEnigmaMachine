@@ -19,7 +19,6 @@
   cable colors:
     yellow: A5
     Green: A4
-
 */
 
 #include <PS2Keyboard.h>
@@ -181,6 +180,7 @@ void encrypt()
       rot47(str);
       Serial.print(message);
       message = "";
+      lcd.clear();
     }
     else if (c == PS2_LEFTARROW)
     {

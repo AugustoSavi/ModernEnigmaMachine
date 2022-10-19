@@ -1,9 +1,7 @@
 <img align="center" src="https://user-images.githubusercontent.com/32443720/173478468-a98c009d-7497-412f-b76c-0ee08abb41a4.png"/>
 
+<h2 align="center">Introdução</h2>
 
-<h1 align="center">PROPOSTA DE TRABALHO DE CONCLUSÃO DE CURSO (TCC)</h1>
-
-<h2 align="center">PITCH</h2>
 Ola meu nome é augusto, sendo a segurança e privacidade do usuario na internet um topico cada vez mais importante nos dias atuais.
 
 justamente pelo grande aumento do uso de computadores com internet e muitos serviços sendo disponibilizados online,
@@ -52,8 +50,8 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [x] Tornar publico
 - [x] Refatorar programa python
 - [x] criar banner repo git
-- [ ] permitir scrollar no visor (permitir voltar)
-- [ ] selecionar criptografia (rot47)
+- [x] permitir scrollar no visor (permitir voltar)
+- [x] selecionar criptografia (rot47)
 - [ ] criptografar mensagem no modo encrypt
 - [ ] descriptografar mensagem no modo decrypt
 - [ ] colocar todos os comentarios e variaveis em inglês
