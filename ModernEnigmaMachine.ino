@@ -25,7 +25,8 @@
 #include <PS2Keyboard.h>
 #include <LiquidCrystal_I2C.h>
 
-#define I2C_ADDR 0x27
+#define I2C_ADDR 0x27 // Arduino COM SHIELD
+// #define I2C_ADDR 0x3F //Arduino SEM SHIELD
 
 LiquidCrystal_I2C lcd(I2C_ADDR, 16, 2); // set the LCD address to 0x27 for a 16 chars and 2 line display
 PS2Keyboard keyboard;
