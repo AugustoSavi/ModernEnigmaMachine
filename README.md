@@ -1,8 +1,11 @@
-<img align="center" src="https://user-images.githubusercontent.com/32443720/173478468-a98c009d-7497-412f-b76c-0ee08abb41a4.png"/>
+<h1 align="center">PROPOSTA DE TRABALHO DE CONCLUSÃO DE CURSO (TCC)</h1>
 
-<h2 align="center">Introdução</h2>
+<h2 align="center">Assista ao vídeo Demonstração</h2>
 
-Ola meu nome é augusto, sendo a segurança e privacidade do usuario na internet um topico cada vez mais importante nos dias atuais.
+[![Watch the video](https://user-images.githubusercontent.com/32443720/201154283-ecf50440-0964-4207-ac31-1d5e1d04e25c.png)](https://youtu.be/Wa5P3EffBTg)
+
+<h2 align="center">PITCH</h2>
+Olá meu nome é augusto, sendo a segurança e privacidade do usuario na internet um topico cada vez mais importante nos dias atuais.
 
 justamente pelo grande aumento do uso de computadores com internet e muitos serviços sendo disponibilizados online,
 como exemplo os comunicadores instantaneos: whatsapp, telegram, messenger...
@@ -56,6 +59,11 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [ ] descriptografar mensagem no modo decrypt
 - [ ] colocar todos os comentarios e variaveis em inglês
 - [ ] fazer comandos compinados funcionar (ctrl + a)
+
+### bugs a serem resolvidos
+- [x] troca de modo do programa
+- [x] decrypt not working
+- [x] Quando clica varias vezes rapidamente esta escrevendo o texto invés de realizar a ação
 
 <h2 align="center">Versão 1 funcional</h2>
 

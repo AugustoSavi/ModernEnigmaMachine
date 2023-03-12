@@ -9,7 +9,6 @@ from Arduino import Arduino
 
 arduino = Arduino()
 
-
 class Application():
 
     def __init__(self):
