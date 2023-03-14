@@ -1,3 +1,13 @@
 periodicos capes
 
 verificar os testes que seram empregados
+
+Este é um código em C++ para Arduino que usa a biblioteca hidboot.h para detectar entrada do teclado e exibi-la no display LCD 16x2. Ele também possui algumas funções adicionais, como criptografia rot47 e rolagem de mensagem.
+
+A classe principal é a KbdRptParser, que estende a classe KeyboardReportParser da biblioteca hidboot.h. Essa classe sobrescreve os métodos OnKeyDown e OnKeyPressed, que são chamados quando uma tecla é pressionada e solta, respectivamente.
+
+O método normalKeyboard é chamado quando o programa está no modo normal (modeProgram == 0), imprimindo a tecla pressionada no monitor serial. O método encrypt é chamado quando o programa está no modo de criptografia (modeProgram == 1), onde a mensagem é criptografada usando rot47 quando a tecla Enter é pressionada. O método scrollKeyboard é chamado quando o programa está no modo de rolagem de mensagem (modeProgram == 2), permitindo que o usuário role a mensagem para a direita ou esquerda usando as setas esquerda e direita do teclado.
+
+O método setScrollNumber é usado para definir a quantidade de rolagem da mensagem. A função rot47 criptografa a mensagem usando um algoritmo de substituição simples.
+
+O programa também define várias constantes para mapear as teclas do teclado para seus valores numéricos correspondentes. Por fim, o programa instancie o objeto LiquidCrystal_I2C para controlar o display LCD.

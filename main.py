@@ -54,6 +54,7 @@ class Application():
     def inputs(self):
         self.textBox = Text(self.root, height=15, width=86)
         self.textBox.place(relx=0.02, rely=0.15)
+        self.textBox.insert(1.0,"pF8FDE@ 7@: D2325@ 2 ?@:E6 ;@82C 5:23=@ c 4@> @D 2>:8@D[ ;F?E@D ?@ 5:D4@C5 @D c A2CE:4:A2C2> 56 8C2?56D 2G6?EFC2D]")
 
     def callbackFunctionPort(self, port):
         arduino.connectSerialPort(port)
@@ -88,7 +89,7 @@ class Application():
         self.root.withdraw()
         image = Image.open("hidden.ico")
         menu = (item('Quit', self.quit_window), item('Open', self.show_window))
-        icon = pystray.Icon("hidden", image, "Enigma Machine", menu)
+        icon = pystray.Icon("hidden", image, "Modern enigma machine", menu)
         icon.run()
 
     def initListener(self):

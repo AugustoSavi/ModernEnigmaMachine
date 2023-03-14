@@ -1,9 +1,10 @@
 #include <hidboot.h>
-//#include <usbhub.h>
 #include <LiquidCrystal_I2C.h>
-
 #define I2C_ADDR 0x27 // Arduino COM SHIELD
+
 LiquidCrystal_I2C lcd(I2C_ADDR, 16, 2); // set the LCD address to 0x27 for a 16 chars and 2 line display
+
+
 String message = "", messagemInput = "";
 const char *str;
 
@@ -12,13 +13,7 @@ const char *str;
   encrypt: 1
   decrypt: 2
 */
-int modeProgram = 1, scroll = 0;
-
-// Satisfy the IDE, which needs to see the include statement in the ino too.
-//#ifdef dobogusinclude
-//#include <spi4teensy3.h>
-//#endif
-//#include <SPI.h>
+int modeProgram = 0, scroll = 0;
 
 uint8_t UPARROW_KEYBOARD = 82;
 uint8_t RIGTHARROW_KEYBOARD = 79;
@@ -34,7 +29,6 @@ class KbdRptParser : public KeyboardReportParser
     void normalKeyboard(uint8_t mod, uint8_t key);
     void encrypt(uint8_t mod, uint8_t key);
     void printLCD(String message);
-    void scrollKeyboard(uint8_t key);
     char rot47(char *s);
     void setScrollNumber(int number, int lengthString);
 
@@ -61,7 +55,15 @@ void KbdRptParser::OnKeyPressed(uint8_t mod, uint8_t key)
   }
   else if (modeProgram == 2)
   {
-    scrollKeyboard(key);
+    if (key == LEFTARROW_KEYBOARD)
+    {
+      setScrollNumber(-1, message.length());
+    }
+    else if (key == RIGTHARROW_KEYBOARD)
+    {
+      setScrollNumber(1, message.length());
+    }
+    printLCD(message);
   }
 };
 
@@ -175,20 +177,6 @@ char KbdRptParser::rot47(char *s)
   return s;
 }
 
-void KbdRptParser::scrollKeyboard(uint8_t key)
-{
-  //     otherwise, just print all normal characters
-  //     check for some of the special keys
-  if (key == LEFTARROW_KEYBOARD)
-  {
-    setScrollNumber(-1, message.length());
-  }
-  else if (key == RIGTHARROW_KEYBOARD)
-  {
-    setScrollNumber(1, message.length());
-  }
-}
-
 void KbdRptParser::setScrollNumber(int number, int lengthString)
 {
   if ((lengthString + scroll + number) > lengthString)
@@ -263,15 +251,16 @@ void showMessageLcd(String message)
   lcd.clear();
 }
 
-void decryptMessage(String message)
+void decryptMessage(String message_will_be_decrypt)
 {
   lcd.clear();
-  str = message.c_str();
-  //  rot47(str);
-  printLCD(str);
+  str = message_will_be_decrypt.c_str();
+  rot47_underscope(str);
+  message = String(str);
+  printLCD(message);
 }
 
-char rot47(char *s)
+char rot47_underscope(char *s)
 {
   char *p = s;
   while (*p)

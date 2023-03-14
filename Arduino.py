@@ -18,6 +18,7 @@ class Arduino:
 
     # connect with the serial port
     def connectSerialPort(self, port):
+        # fazer validação para ficar procurando invés de fechar
         try:
             self.serialPort = self.serial.Serial(
                 port.split('-')[0].strip()
