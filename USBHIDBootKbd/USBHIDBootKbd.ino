@@ -1,9 +1,18 @@
 #include <hidboot.h>
 #include <LiquidCrystal_I2C.h>
+
 #define I2C_ADDR 0x27 // Arduino COM SHIELD
 
-LiquidCrystal_I2C lcd(I2C_ADDR, 16, 2); // set the LCD address to 0x27 for a 16 chars and 2 line display
+#define UPARROW_KEYBOARD 82
+#define RIGTHARROW_KEYBOARD 79
+#define DOWNARROW_KEYBOARD 81
+#define LEFTARROW_KEYBOARD 80
+#define DELETE_KEYBOARD 42
+#define ENTER_KEYBOARD 40
+#define TAB_KEYBOARD 43
+#define ESC_KEYBOARD 41
 
+LiquidCrystal_I2C lcd(I2C_ADDR, 16, 2); // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 String message = "", messagemInput = "";
 const char *str;
@@ -14,15 +23,6 @@ const char *str;
   decrypt: 2
 */
 int modeProgram = 0, scroll = 0;
-
-uint8_t UPARROW_KEYBOARD = 82;
-uint8_t RIGTHARROW_KEYBOARD = 79;
-uint8_t DOWNARROW_KEYBOARD = 81;
-uint8_t LEFTARROW_KEYBOARD = 80;
-uint8_t DELETE_KEYBOARD = 42;
-uint8_t ENTER_KEYBOARD = 40;
-uint8_t TAB_KEYBOARD = 43;
-uint8_t ESC_KEYBOARD = 41;
 
 class KbdRptParser : public KeyboardReportParser
 {
@@ -44,26 +44,25 @@ void KbdRptParser::OnKeyDown(uint8_t mod, uint8_t key)
 
 void KbdRptParser::OnKeyPressed(uint8_t mod, uint8_t key)
 {
-  if (modeProgram == 0)
-  {
-    normalKeyboard(mod, key);
-  }
-  else if (modeProgram == 1)
-  {
-    encrypt(mod, key);
-    printLCD(message);
-  }
-  else if (modeProgram == 2)
-  {
-    if (key == LEFTARROW_KEYBOARD)
-    {
-      setScrollNumber(-1, message.length());
-    }
-    else if (key == RIGTHARROW_KEYBOARD)
-    {
-      setScrollNumber(1, message.length());
-    }
-    printLCD(message);
+  switch (modeProgram) {
+    case 0:
+      normalKeyboard(mod, key);
+      break;
+    case 1:
+      encrypt(mod, key);
+      printLCD(message);
+      break;
+    case 2:
+      if (key == LEFTARROW_KEYBOARD)
+      {
+        setScrollNumber(-1, message.length());
+      }
+      else if (key == RIGTHARROW_KEYBOARD)
+      {
+        setScrollNumber(1, message.length());
+      }
+      printLCD(message);
+      break;
   }
 };
 
@@ -71,95 +70,69 @@ void KbdRptParser::normalKeyboard(uint8_t mod, uint8_t key)
 {
   uint8_t c = OemToAscii(mod, key);
 
-  // check for some of the special keys
-  if (key == ENTER_KEYBOARD)
-  {
-    Serial.print("[Enter]");
-  }
-  else if (key == TAB_KEYBOARD)
-  {
-    Serial.print("[Tab]");
-  }
-  else if (key == ESC_KEYBOARD)
-  {
-    Serial.print("[ESC]");
-  }
-  else if (key == DOWNARROW_KEYBOARD)
-  {
-    Serial.print("[PgDn]");
-  }
-  else if (key == UPARROW_KEYBOARD)
-  {
-    Serial.print("[PgUp]");
-  }
-  else if (key == LEFTARROW_KEYBOARD)
-  {
-    Serial.print("[Left]");
-  }
-  else if (key == RIGTHARROW_KEYBOARD)
-  {
-    Serial.print("[Right]");
-  }
-  else if (key == UPARROW_KEYBOARD)
-  {
-    Serial.print("[Up]");
-  }
-  else if (key == DOWNARROW_KEYBOARD)
-  {
-    Serial.print("[Down]");
-  }
-  else if (key == DELETE_KEYBOARD)
-  {
-    Serial.print("[Backspace]");
-  }
-  //    else if (key == PS2_F1)
-  //    {
-  //      Serial.print("[F1]");
-  //    }
-  else
-  {
-    if (c) {
-      Serial.print((char)c);
-    }
+  switch (key) {
+    // check for some of the special keys
+    case ENTER_KEYBOARD:
+      Serial.print("[Enter]");
+      break;
+    case TAB_KEYBOARD:
+      Serial.print("[Tab]");
+      break;
+    case ESC_KEYBOARD:
+      Serial.print("[ESC]");
+      break;
+    case LEFTARROW_KEYBOARD:
+      Serial.print("[Left]");
+      break;
+    case RIGTHARROW_KEYBOARD:
+      Serial.print("[Right]");
+      break;
+    case UPARROW_KEYBOARD:
+      Serial.print("[Up]");
+      break;
+    case DOWNARROW_KEYBOARD:
+      Serial.print("[Down]");
+      break;
+    case DELETE_KEYBOARD:
+      Serial.print("[Backspace]");
+      break;
+    default:
+      if (c) {
+        Serial.print((char)c);
+      }
+      break;
   }
 }
 
 void KbdRptParser::encrypt(uint8_t mod, uint8_t key)
 {
   uint8_t c = OemToAscii(mod, key);
-  // otherwise, just print all normal characters
-  // check for some of the special keys
-  if (key == ENTER_KEYBOARD)
-  {
-    str = message.c_str();
-    rot47(str);
-    Serial.print(message);
-    message = "";
-    lcd.clear();
-  }
-  else if (key == LEFTARROW_KEYBOARD)
-  {
-    setScrollNumber(-1, message.length());
-  }
-  else if (key == RIGTHARROW_KEYBOARD)
-  {
-    setScrollNumber(1, message.length());
-  }
-  else if (key == DELETE_KEYBOARD)
-  {
-    if (message.length() > 0)
-    {
-      message = message.substring(0, message.length() - 1);
+  switch (key) {
+    // check for some of the special keys
+    case ENTER_KEYBOARD:
+      str = message.c_str();
+      rot47(str);
+      Serial.print(message);
+      message = "";
       lcd.clear();
-    }
-  }
-  else
-  {
-    if (c) {
-      // otherwise, just print all normal characters
-      message += (char)c;
-    }
-
+      break;
+    case LEFTARROW_KEYBOARD:
+      setScrollNumber(-1, message.length());
+      break;
+    case RIGTHARROW_KEYBOARD:
+      setScrollNumber(1, message.length());
+    case DELETE_KEYBOARD:
+      if (message.length() > 0)
+      {
+        message = message.substring(0, message.length() - 1);
+        lcd.clear();
+      }
+      break;
+    default:
+      if (c) {
+        message += (char)c;
+      }
+      break;
   }
 }
 
@@ -276,21 +249,20 @@ char rot47_underscope(char *s)
 
 void showMode()
 {
-  if (modeProgram == 0)
-  {
-    lcd.backlight();
-    showMessageLcd("Modo selecionado: normal");
-    lcd.noBacklight();
-  }
-  else if (modeProgram == 1)
-  {
-    lcd.backlight();
-    showMessageLcd("Modo selecionado: encrypt");
-  }
-  else if (modeProgram == 2)
-  {
-    lcd.backlight();
-    showMessageLcd("Modo selecionado: decrypt");
+  switch (modeProgram) {
+    case 0:
+      lcd.backlight();
+      showMessageLcd("Modo selecionado: normal");
+      lcd.noBacklight();
+      break;
+    case 1:
+      lcd.backlight();
+      showMessageLcd("Modo selecionado: encrypt");
+      break;
+    case 2:
+      lcd.backlight();
+      showMessageLcd("Modo selecionado: decrypt");
+      break;
   }
 }
 
