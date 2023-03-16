@@ -1,11 +1,9 @@
-import pyautogui, serial, pyautogui
+import serial, pyautogui
 import serial.tools.list_ports
 from tkinter import messagebox
 
 class Arduino:
-
     def __init__(self):
-        self.serial = serial
         self.serialPort = None
         self.serialPorts = self.getSerialPorts()
         self.serialPortInput = ''
@@ -18,27 +16,20 @@ class Arduino:
 
     # connect with the serial port
     def connectSerialPort(self, port):
-        # fazer validação para ficar procurando invés de fechar
         try:
-            self.serialPort = self.serial.Serial(
-                port.split('-')[0].strip()
-                , 115200
-                , timeout=1
-            )  # ttyACM1 for Arduino board
+            self.serialPort = serial.Serial(port.split('-')[0].strip(), 115200, timeout=1)
         except FileNotFoundError as error:
             messagebox.showerror("Error", error)
 
     # listening the serial port
     def listenSerialPort(self):
-        print("Listining serial port")
         while True:
             try:
                 self.serialPortInput += self.serialPort.readline().decode('ascii')
                 if len(self.serialPortInput):
                     self.serialPortInput = self.verifyString()
-            except:
-                pass
-            # serialPort.flush()
+            except KeyboardInterrupt:
+                break
 
     # send text to decode in arduino
     def sendTextToDecryptSerial(self, message):
@@ -54,15 +45,18 @@ class Arduino:
 
     # works with the string that arrives from the serial
     def verifyString(self):
-        for key in self.keysAccepts:
-            if self.serialPortInput.find(key) == 0:
-                keyFormated = key.replace("[", "").replace("]", "").lower()
-                pyautogui.press(keyFormated)
-                self.serialPortInput = self.serialPortInput[len(key): len(self.serialPortInput)]
-                if(len(self.serialPortInput)):
-                    self.verifyString()
-
-        if(len(self.serialPortInput)):
-            pyautogui.write(self.serialPortInput)
+        while self.serialPortInput:
+            for key in self.keysAccepts:
+                if self.serialPortInput.find(key) == 0:
+                    keyFormated = key.replace("[", "").replace("]", "").lower()
+                    pyautogui.press(keyFormated)
+                    self.serialPortInput = self.serialPortInput[len(key):]
+                    break
+            else:
+                break
         
-        return ''
+        if self.serialPortInput:
+            pyautogui.write(self.serialPortInput)
+            self.serialPortInput = ''
+        
+        return self.serialPortInput
