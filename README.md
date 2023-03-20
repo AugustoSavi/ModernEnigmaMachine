@@ -55,8 +55,8 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [x] criar banner repo git
 - [x] permitir scrollar no visor (permitir voltar)
 - [x] selecionar criptografia (rot47)
-- [ ] criptografar mensagem no modo encrypt
-- [ ] descriptografar mensagem no modo decrypt
+- [x] criptografar mensagem no modo encrypt
+- [x] descriptografar mensagem no modo decrypt
 - [ ] colocar todos os comentarios e variaveis em inglês
 - [ ] fazer comandos compinados funcionar (ctrl + a)
 
