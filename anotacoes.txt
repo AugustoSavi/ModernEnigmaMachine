@@ -1,5 +1,9 @@
 periodicos capes
 
+nos trabalhos futuros comentar sobre a possibilibidade de troca de criptografia
+
+materiais e metodos colocar 
+
 verificar os testes que seram empregados
 
 Este é um código em C++ para Arduino que usa a biblioteca hidboot.h para detectar entrada do teclado e exibi-la no display LCD 16x2. Ele também possui algumas funções adicionais, como criptografia rot47 e rolagem de mensagem.
