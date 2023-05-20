@@ -6,6 +6,9 @@ materiais e metodos colocar
 
 verificar os testes que seram empregados
 
+O sketch usa 16142 bytes (50%) de espaço de armazenamento para programas. O máximo são 32256 bytes.
+Variáveis globais usam 883 bytes (43%) de memória dinâmica, deixando 1165 bytes para variáveis locais. O máximo são 2048 bytes.
+
 Este é um código em C++ para Arduino que usa a biblioteca hidboot.h para detectar entrada do teclado e exibi-la no display LCD 16x2. Ele também possui algumas funções adicionais, como criptografia rot47 e rolagem de mensagem.
 
 A classe principal é a KbdRptParser, que estende a classe KeyboardReportParser da biblioteca hidboot.h. Essa classe sobrescreve os métodos OnKeyDown e OnKeyPressed, que são chamados quando uma tecla é pressionada e solta, respectivamente.
@@ -15,3 +18,33 @@ O método normalKeyboard é chamado quando o programa está no modo normal (mode
 O método setScrollNumber é usado para definir a quantidade de rolagem da mensagem. A função rot47 criptografa a mensagem usando um algoritmo de substituição simples.
 
 O programa também define várias constantes para mapear as teclas do teclado para seus valores numéricos correspondentes. Por fim, o programa instancie o objeto LiquidCrystal_I2C para controlar o display LCD.
+
+
+
+## Criação do Artigo:
+
+
+### Materiais e metodo:
+- não detalhar codigo 
+- verbos no passado
+- citar um pouco de levantamento bibliografico
+
+
+### procedimento:
+- bibliografico
+
+1) introdução (contextualização, problema da pesquisa, objetivo, justificativa) tbem denntro dela a Fundamentação Teorica (veriicar o caso de cada trabalho)
+
+2) trabalhos correlatos
+
+3) Materiais e métodos (o que é a pesquisa, caracterização da pesquisa - quanto a natureza, aos objetivos aos procedimentos e a abordagem), figura de arquitetura do trabalho com o que compreendeu o desenvolvimento da pesquisa
+
+divisão em subseções cada uma das etpas de desenvolvimento do trabalho, e explicar como cada uma dessas etapas foi feita (métodos) e o que foi usado (materiais)
+
+4) Resultados e discussão
+
+5) conclusão
+
+6) revisa a introdução
+
+7) escreve o resumo e revisa o título

@@ -30,6 +30,8 @@ class Arduino:
                     self.serialPortInput = self.verifyString()
             except KeyboardInterrupt:
                 break
+            except serial.serialutil.SerialException:
+                pyautogui.alert('Arduino desconectado')
 
     # send text to decode in arduino
     def sendTextToDecryptSerial(self, message):

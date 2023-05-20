@@ -5,7 +5,7 @@
 [![Watch the video](https://user-images.githubusercontent.com/32443720/201154283-ecf50440-0964-4207-ac31-1d5e1d04e25c.png)](https://youtu.be/Wa5P3EffBTg)
 
 <h2 align="center">PITCH</h2>
-Olá meu nome é augusto, sendo a segurança e privacidade do usuario na internet um topico cada vez mais importante nos dias atuais.
+Sendo a segurança e privacidade do usuario na internet um topico cada vez mais importante nos dias atuais.
 
 justamente pelo grande aumento do uso de computadores com internet e muitos serviços sendo disponibilizados online,
 como exemplo os comunicadores instantaneos: whatsapp, telegram, messenger...
@@ -65,11 +65,49 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [x] decrypt not working
 - [x] Quando clica varias vezes rapidamente esta escrevendo o texto invés de realizar a ação
 
-<h2 align="center">Versão 1 funcional</h2>
+<h1 align="center">Arquitetura do projeto</h1>
 
-![WhatsApp Image 2022-10-17 at 19 39 39](https://user-images.githubusercontent.com/32443720/196297172-9dbef4b7-01c0-4d2c-a54f-4283fcf06066.jpeg)
+![arquitetura](Arquitetura%20do%20prototipo_.png)
 
-<h2 align="center">Versão 2 sendo construida</h2>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h1 align="center">Exemplos de utilização</h1>
+
+<h3 align="center">Sem o middleware</h3>
+
+![log1](mensagens_sem_middleware/log-1/2023-05-14%2000:17:14.672851.png)
+
+<h3 align="center">Com o middleware</h3>
+
+![log1](mensagens_com_middleware/log-1/2023-05-14%2001:27:24.596708.png)
+
+
+<h3 align="center">Sem o middleware</h3>
+
+![log2](mensagens_sem_middleware/log-2/2023-05-14%2000:18:00.963768.png)
+
+<h3 align="center">Com o middleware</h3>
+
+![log2](mensagens_com_middleware/log-2/2023-05-14%2001:28:24.731790.png)
+
+<h3 align="center">Sem o middleware</h3>
+
+![log2](mensagens_sem_middleware/log-3/2023-05-14%2000:24:25.820404.png)
+
+<h3 align="center">Com o middleware</h3>
+
+![log2](mensagens_com_middleware/log-2/2023-05-14%2001:28:24.731790.png)
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<h2 align="center">Imagens da Poc</h2>
 
 ![20221006_002124](https://user-images.githubusercontent.com/32443720/196296975-0958eafe-7150-4eb9-bbb1-8e1962529ded.jpg)
 
