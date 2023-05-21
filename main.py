@@ -1,5 +1,3 @@
-import os
-import sys
 import pystray
 from tkinter import *
 from tkinter import ttk
@@ -27,9 +25,10 @@ class Application:
 
     def buttons(self):
         # select arduino port
-        self.selectSerialPort = ttk.Combobox(self.root, values=arduino.serialPorts)
+        self.selectSerialPort = ttk.Combobox(self.root)
         self.selectSerialPort.place(relx=0.02, rely=0.05, width=250, height=20)
-        self.selectSerialPort.current(0)
+        self.update_combobox_values()
+
         self.selectSerialPort.bind("<<ComboboxSelected>>", lambda event: self.callbackFunctionPort(self.selectSerialPort.get()))
 
         # select the mode
@@ -41,6 +40,14 @@ class Application:
         # button
         self.buttonSend = Button(self.root, text='Send', command=self.callbackFunctionSendTextToDecrypt)
         self.buttonSend.place(relx=0.02, rely=0.9, width=695, height=30)
+
+    def update_combobox_values(self):
+        ports = Arduino.find_serial_ports(arduino)
+        if(ports):
+            port_names = [port for port in ports]
+            self.selectSerialPort['values'] = port_names
+            if len(port_names) > 0:
+                self.selectSerialPort.current(0)
 
     # input text to send to Arduino
     def inputs(self):

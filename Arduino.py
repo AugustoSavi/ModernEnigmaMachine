@@ -1,37 +1,60 @@
 import serial, pyautogui
+import multiprocessing
 import serial.tools.list_ports
-from tkinter import messagebox
+import serial.tools.list_ports
 
 class Arduino:
     def __init__(self):
         self.serialPort = None
-        self.serialPorts = self.getSerialPorts()
+        self.serialPorts = self.find_serial_ports()
         self.serialPortInput = ''
         self.programModes = ['Normal Keyboard', 'encrypt', 'decrypt']
         self.keysAccepts = ["[ESC]", "[Enter]", "[PgDn]", "[PgUp]", "[Left]", "[Right]", "[Up]", "[Down]", "[Backspace]","[Tab]"]
 
     # get list of serial ports
     def getSerialPorts(self):
-        return serial.tools.list_ports.comports()
+        while True:
+            try:
+                ports = list(serial.tools.list_ports.comports())
+                if len(ports) > 0:
+                    return ports
+            except serial.SerialException:
+                pass
+
+    def find_serial_ports(self):
+        with multiprocessing.Pool(1) as pool:
+            result = pool.apply_async(self.getSerialPorts)
+            try:
+                print("--procurando serial--")
+                ports = result.get(timeout=5)  # Defina o tempo limite desejado
+                if (ports):
+                    print("achado")
+                return ports
+            except multiprocessing.TimeoutError:
+                print("multiprocessing.TimeoutError")
+
 
     # connect with the serial port
     def connectSerialPort(self, port):
-        try:
-            self.serialPort = serial.Serial(port.split('-')[0].strip(), 115200, timeout=1)
-        except FileNotFoundError as error:
-            messagebox.showerror("Error", error)
+        if (port):
+            try:
+                self.serialPort = serial.Serial(port.split('-')[0].strip(), 115200, timeout=1)
+            except FileNotFoundError as error:
+                pyautogui.alert('Arduino desconectado')
 
     # listening the serial port
     def listenSerialPort(self):
-        while True:
-            try:
-                self.serialPortInput += self.serialPort.readline().decode('ascii')
-                if len(self.serialPortInput):
-                    self.serialPortInput = self.verifyString()
-            except KeyboardInterrupt:
-                break
-            except serial.serialutil.SerialException:
-                pyautogui.alert('Arduino desconectado')
+        if self.serialPort:
+            while True:
+                try:
+                    self.serialPortInput += self.serialPort.readline().decode('ascii')
+                    if len(self.serialPortInput):
+                        self.serialPortInput = self.verifyString()
+                except KeyboardInterrupt:
+                    break
+                except serial.serialutil.SerialException:
+                    pyautogui.alert('Arduino desconectado')
+                    break
 
     # send text to decode in arduino
     def sendTextToDecryptSerial(self, message):
