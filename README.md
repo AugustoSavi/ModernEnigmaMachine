@@ -34,9 +34,7 @@ Na outra extremidade, onde a mensagem é recebida, seria necessário um disposit
 - [x] Refatorar programa em Python
 - [x] Criar banner para o repositório do Git
 - [x] Permitir rolagem no visor (permitir voltar)
-- [
-
-x] Selecionar criptografia (rot47)
+- [x] Selecionar criptografia (rot47)
 - [x] Criptografar mensagem no modo "encrypt"
 - [x] Descriptografar mensagem no modo "decrypt"
 - [ ] Colocar todos os comentários e variáveis em inglês
