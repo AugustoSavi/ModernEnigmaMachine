@@ -107,8 +107,18 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 <br/>
 <br/>
 
+<h1 align="center">Imagens da aplicação</h1>
 
-<h1 align="center">Imagens da Poc</h1>
+<p align="center">
+  <img src="images/aplicacao.png" alt="imagem da aplicação no computador">
+</p>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h1 align="center">Imagens do hardware</h1>
 
 ![1](images/middleware/1.jpg)
 ![1](images/middleware/2.jpg)
