@@ -1,128 +1,93 @@
-<h1 align="center">PROPOSTA DE TRABALHO DE CONCLUSÃO DE CURSO (TCC)</h1>
+# PROPOSTA DE TRABALHO DE CONCLUSÃO DE CURSO (TCC)
 
-<h2 align="center">Assista ao vídeo Demonstração</h2>
+## Assista ao vídeo de demonstração
 
-[![Watch the video](https://user-images.githubusercontent.com/32443720/201154283-ecf50440-0964-4207-ac31-1d5e1d04e25c.png)](https://youtu.be/Wa5P3EffBTg)
+[![Assista ao vídeo](https://user-images.githubusercontent.com/32443720/201154283-ecf50440-0964-4207-ac31-1d5e1d04e25c.png)](https://youtu.be/Wa5P3EffBTg)
 
-<h2 align="center">PITCH</h2>
-Sendo a segurança e privacidade do usuario na internet um topico cada vez mais importante nos dias atuais.
+## PITCH
 
-justamente pelo grande aumento do uso de computadores com internet e muitos serviços sendo disponibilizados online,
-como exemplo os comunicadores instantaneos: whatsapp, telegram, messenger...
+A segurança e privacidade do usuário na internet têm se tornado temas cada vez mais importantes nos dias atuais. Com o aumento do uso de computadores com acesso à internet e a disponibilização de muitos serviços online, como WhatsApp, Telegram, Messenger, entre outros, o número de computadores infectados por malwares também tem aumentado. Um estudo da Kingsoft de 2016 mostrou que, em média, de 2 a 5 milhões de computadores são infectados por dia.
 
-juntamente com o aumento do uso de internet tbm tem aumento o numero de computadores infectados por malwares, tendo um estudo da Kingsoft de 2016 mostrando que em média 2-5 milhões de computadores são infectados por dia
+Embora os comunicadores instantâneos utilizem criptografia entre dispositivos, não é possível garantir que o dispositivo que recebeu ou enviou a mensagem não esteja infectado por um malware. Esses malwares podem capturar a mensagem antes mesmo do usuário pressionar ENTER, por meio do uso de keyloggers ou gravando a tela do usuário para enviá-la a hackers.
 
-atualmente sabemos que esses comunicadores instantaneos utilizam criptografia entre um dispositivo e outro, porem não podem garantir que o dispositivo que recebeu ou enviou a mensagem já não esteja infectado por um malware...
+A minha proposta busca uma solução para esse problema. Utilizando um Arduino conectado ao computador, podemos criar um middleware entre um teclado externo e o computador para realizar a criptografia de mensagens que realmente precisam ser seguras e privadas.
 
-podendo esse malware saber a mensagem que o usuario vai enviar antes mesmo dele precionar ENTER com a utilização de um keylogger ou ate mesmo gravando a tela do usuario e enviando para o hacker.
+O Arduino receberia a entrada de dados do usuário por meio do teclado e criptografaria a mensagem antes mesmo de ser digitada no computador. O Arduino também possibilitaria visualizar e alterar a mensagem original por meio de um display conectado a ele.
 
-Minha proposta busca uma solução para isso.
-Podemos com a utilização de um arduino conectado ao computador criar um middleware entre um teclado externo e o computador
-para realizar a criptografia de mensagems que precisam realmente ser seguras e privadas...
+Na outra extremidade, onde a mensagem é recebida, seria necessário um dispositivo semelhante. Nesse caso, seria utilizado um programa em que a mensagem recebida é colada e enviada para o Arduino realizar a descriptografia da mensagem. A mensagem original seria exibida no display.
 
-O arduino receberia a entrada de dados do usuario atraves do teclado e realizaria uma criptografia na mensagem antes mesmo que ela seja realmente digitada no computador, podendo ele visualizar e alterar a mensagem original atraves de um display também conectado ao arduino
+## ANOTAÇÕES
 
-e a outra ponta que receberia essa mensagem também teria que ter um mesmo dispositivo, 
-porem no caso de quem recebe a mensagem existiria um programa em que você cola a mensagem recebida e envia para o arduino para que o mesmo realize a descriptografia da mensagem e mostre a mensagem original também atraves do display.
+- Yubico
+- KeyScrambler
+- [Teclado sem fio da Microsoft com sistema de criptografia](https://www.techtudo.com.br/noticias/2011/06/novo-teclado-sem-fio-da-microsoft-com-sistema-de-criptografia.ghtml)
+- [Review: Teclado Mecânico Wireless Matias Secure Pro](https://forum.adrenaline.com.br/threads/review-teclado-mecanico-wireless-matias-secure-pro.527253/)
+- [Keymap ABNT2](https://www.hackeduca.com.br/ligando-um-teclado-ps2-ao-arduino/)
+- [Teclas PyAutoGUI](https://pyautogui.readthedocs.io/en/latest/keyboard.html#keyboard-keys)
+- [Display LCD I2C](https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library)
+- [Ícone](https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380)
 
-<h2 align="center">ANOTACÕES</h2>
+## TO-DO
 
-Yubico
+- [x] Renomear o repositório
+- [x] Tornar público
+- [x] Refatorar programa em Python
+- [x] Criar banner para o repositório do Git
+- [x] Permitir rolagem no visor (permitir voltar)
+- [
 
-keyscrambler
+x] Selecionar criptografia (rot47)
+- [x] Criptografar mensagem no modo "encrypt"
+- [x] Descriptografar mensagem no modo "decrypt"
+- [ ] Colocar todos os comentários e variáveis em inglês
+- [ ] Fazer comandos combinados funcionarem (Ctrl + A)
 
-https://www.techtudo.com.br/noticias/2011/06/novo-teclado-sem-fio-da-microsoft-com-sistema-de-criptografia.ghtml
+## Bugs a serem resolvidos
 
-https://forum.adrenaline.com.br/threads/review-teclado-mecanico-wireless-matias-secure-pro.527253/
+- [x] Troca de modo do programa
+- [x] Decrypt não está funcionando
+- [x] Ao clicar várias vezes rapidamente, o texto está sendo escrito em vez de executar a ação
+- [ ] Remover a limitação de utilização de apenas caracteres ASCII
 
-### keyMap abnt2 
+# Arquitetura do projeto
 
-https://www.hackeduca.com.br/ligando-um-teclado-ps2-ao-arduino/
+![Arquitetura](images/arquitetura.png)
 
-### teclas pyautogui
-https://pyautogui.readthedocs.io/en/latest/keyboard.html#keyboard-keys
+# Exemplos de utilização
 
-### display lcd ic2
-https://github.com/fdebrabander/Arduino-LiquidCrystal-I2C-library
+## Sem o middleware
 
-### icon
-https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
+![Log 1](images/mensagens_sem_middleware/log-1/2023-05-14%2000:17:14.672851.png)
 
-### to do :
-- [x] Renomear repo
-- [x] Tornar publico
-- [x] Refatorar programa python
-- [x] criar banner repo git
-- [x] permitir scrollar no visor (permitir voltar)
-- [x] selecionar criptografia (rot47)
-- [x] criptografar mensagem no modo encrypt
-- [x] descriptografar mensagem no modo decrypt
-- [ ] colocar todos os comentarios e variaveis em inglês
-- [ ] fazer comandos compinados funcionar (ctrl + a)
+## Com o middleware
 
-### bugs a serem resolvidos
-- [x] troca de modo do programa
-- [x] decrypt not working
-- [x] Quando clica varias vezes rapidamente esta escrevendo o texto invés de realizar a ação
-- [ ] remover limitação de utilização de somente caracteres ascii
+![Log 1](images/mensagens_com_middleware/log-1/2023-05-14%2001:27:24.596708.png)
 
-<h1 align="center">Arquitetura do projeto</h1>
+## Sem o middleware
 
-![arquitetura](images/arquitetura.png)
+![Log 2](images/mensagens_sem_middleware/log-2/2023-05-14%2000:18:00.963768.png)
 
-<br/>
-<br/>
-<br/>
-<br/>
+## Com o middleware
 
-<h1 align="center">Exemplos de utilização</h1>
+![Log 2](images/mensagens_com_middleware/log-2/2023-05-14%2001:28:24.731790.png)
 
-<h3 align="center">Sem o middleware</h3>
+## Sem o middleware
 
-![log1](images/mensagens_sem_middleware/log-1/2023-05-14%2000:17:14.672851.png)
+![Log 3](images/mensagens_sem_middleware/log-3/2023-05-14%2000:24:25.820404.png)
 
-<h3 align="center">Com o middleware</h3>
+## Com o middleware
 
-![log1](images/mensagens_com_middleware/log-1/2023-05-14%2001:27:24.596708.png)
+![Log 3](images/mensagens_com_middleware/log-2/2023-05-14%2001:28:24.731790.png)
 
+# Imagens da aplicação
 
-<h3 align="center">Sem o middleware</h3>
+![Imagem da aplicação no computador](images/aplicacao.png)
 
-![log2](images/mensagens_sem_middleware/log-2/2023-05-14%2000:18:00.963768.png)
-
-<h3 align="center">Com o middleware</h3>
-
-![log2](images/mensagens_com_middleware/log-2/2023-05-14%2001:28:24.731790.png)
-
-<h3 align="center">Sem o middleware</h3>
-
-![log2](images/mensagens_sem_middleware/log-3/2023-05-14%2000:24:25.820404.png)
-
-<h3 align="center">Com o middleware</h3>
-
-![log2](images/mensagens_com_middleware/log-2/2023-05-14%2001:28:24.731790.png)
-
-<br/>
-<br/>
-<br/>
-<br/>
-
-<h1 align="center">Imagens da aplicação</h1>
-
-<p align="center">
-  <img src="images/aplicacao.png" alt="imagem da aplicação no computador">
-</p>
-
-<br/>
-<br/>
-<br/>
-<br/>
-
-<h1 align="center">Imagens do hardware</h1>
+# Imagens do hardware
 
 ![1](images/middleware/1.jpg)
-![1](images/middleware/2.jpg)
-![1](images/middleware/3.jpg)
-![1](images/middleware/4.jpg)
-![1](images/middleware/5.jpg)
-![1](images/middleware/6.jpg)
+![2](images/middleware/2.jpg)
+![3](images/middleware/3.jpg)
+![4](images/middleware/4.jpg)
+![5](images/middleware/5.jpg)
+![6](images/middleware/6.jpg)
