@@ -67,7 +67,7 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 
 <h1 align="center">Arquitetura do projeto</h1>
 
-![arquitetura](Arquitetura%20do%20prototipo_.png)
+![arquitetura](images/arquitetura.png)
 
 <br/>
 <br/>
