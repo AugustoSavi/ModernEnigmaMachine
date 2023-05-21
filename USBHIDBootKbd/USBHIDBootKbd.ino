@@ -136,19 +136,20 @@ void KbdRptParser::encrypt(uint8_t mod, uint8_t key)
   }
 }
 
-char KbdRptParser::rot47(char *s)
+char KbdRptParser::rot47(char* s)
 {
-  char *p = s;
+  char* p = s;
   while (*p)
   {
     if (*p >= '!' && *p <= 'O')
-      *p = ((*p + 47) % 127);
+      *p = ((*p - '!') + 47) % 94 + '!';
     else if (*p >= 'P' && *p <= '~')
-      *p = ((*p - 47) % 127);
+      *p = ((*p - '!') + 47) % 94 + '!';
     p++;
   }
   return s;
 }
+
 
 void KbdRptParser::setScrollNumber(int number, int lengthString)
 {
@@ -228,20 +229,20 @@ void decryptMessage(String message_will_be_decrypt)
 {
   lcd.clear();
   str = message_will_be_decrypt.c_str();
-  rot47_underscope(str);
+  rot47_underscore(str);
   message = String(str);
   printLCD(message);
 }
 
-char rot47_underscope(char *s)
+char* rot47_underscore(char* s)
 {
-  char *p = s;
+  char* p = s;
   while (*p)
   {
     if (*p >= '!' && *p <= 'O')
-      *p = ((*p + 47) % 127);
+      *p = ((*p - '!') + 47) % 94 + '!';
     else if (*p >= 'P' && *p <= '~')
-      *p = ((*p - 47) % 127);
+      *p = ((*p - '!') + 47) % 94 + '!';
     p++;
   }
   return s;
