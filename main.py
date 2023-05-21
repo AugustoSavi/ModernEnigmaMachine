@@ -1,16 +1,16 @@
-# Import the required libraries
+import os
+import sys
+import pystray
 from tkinter import *
 from tkinter import ttk
-from pystray import MenuItem as item
 from PIL import Image
-import pystray, multiprocessing
+import multiprocessing
 
 from Arduino import Arduino
 
 arduino = Arduino()
 
-class Application():
-
+class Application:
     def __init__(self):
         self.root = Tk()
         self.screen()
@@ -27,45 +27,34 @@ class Application():
 
     def buttons(self):
         # select arduino port
-        self.selectSerialPort = ttk.Combobox(self.root,
-                                             values=arduino.serialPorts)
+        self.selectSerialPort = ttk.Combobox(self.root, values=arduino.serialPorts)
         self.selectSerialPort.place(relx=0.02, rely=0.05, width=250, height=20)
         self.selectSerialPort.current(0)
-        self.selectSerialPort.bind(
-            "<<ComboboxSelected>>",
-            self.callbackFunctionPort(self.selectSerialPort.get()))
+        self.selectSerialPort.bind("<<ComboboxSelected>>", lambda event: self.callbackFunctionPort(self.selectSerialPort.get()))
 
         # select the mode
-        self.programModeButton = ttk.Combobox(self.root,
-                                              values=arduino.programModes)
+        self.programModeButton = ttk.Combobox(self.root, values=arduino.programModes)
         self.programModeButton.place(relx=0.4, rely=0.05, width=250, height=20)
         self.programModeButton.current(0)
-        self.programModeButton.bind("<<ComboboxSelected>>",
-                                    self.callbackFunctionMode)
+        self.programModeButton.bind("<<ComboboxSelected>>", lambda event: self.callbackFunctionMode())
 
         # button
-        self.buttonSend = Button(
-            self.root,
-            text='Send',
-            command=self.callbackFunctionSendTextToDecrypt)
+        self.buttonSend = Button(self.root, text='Send', command=self.callbackFunctionSendTextToDecrypt)
         self.buttonSend.place(relx=0.02, rely=0.9, width=695, height=30)
 
     # input text to send to Arduino
     def inputs(self):
         self.textBox = Text(self.root, height=15, width=86)
         self.textBox.place(relx=0.02, rely=0.15)
+        # self.textBox.insert(1.0,"pF8FDE@ 7@: D2325@ 2 ?@:E6 ;@82C 5:23=@ c 4@> @D 2>:8@D[ ;F?E@D ?@ 5:D4@C5 @D c A2CE:4:A2C2> 56 8C2?56D 2G6?EFC2D]")
 
     def callbackFunctionPort(self, port):
         arduino.connectSerialPort(port)
 
-    def callbackFunctionMode(self, event):
+    def callbackFunctionMode(self):
         mode = self.programModeButton.get()
-        if mode == arduino.programModes[0]:
-            arduino.sendModeToSerial(str(0))
-        elif mode == arduino.programModes[1]:
-            arduino.sendModeToSerial(str(1))
-        elif mode == arduino.programModes[2]:
-            arduino.sendModeToSerial(str(2))
+        if mode in arduino.programModes:
+            arduino.sendModeToSerial(str(arduino.programModes.index(mode)))
 
     def callbackFunctionSendTextToDecrypt(self):
         arduino.sendTextToDecryptSerial(self.textBox.get('1.0', END))
@@ -87,8 +76,8 @@ class Application():
     def hide_window(self):
         self.root.withdraw()
         image = Image.open("hidden.ico")
-        menu = (item('Quit', self.quit_window), item('Open', self.show_window))
-        icon = pystray.Icon("hidden", image, "Enigma Machine", menu)
+        menu = (pystray.MenuItem('Quit', self.quit_window), pystray.MenuItem('Open', self.show_window))
+        icon = pystray.Icon("hidden", image, "Modern enigma machine", menu)
         icon.run()
 
     def initListener(self):
@@ -96,6 +85,7 @@ class Application():
         self.startThreading = multiprocessing.Process(
             target=arduino.listenSerialPort)
         self.startThreading.start()
+
 
 
 Application()

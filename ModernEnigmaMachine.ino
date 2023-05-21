@@ -19,7 +19,6 @@
   cable colors:
     yellow: A5
     Green: A4
-
 */
 
 #include <PS2Keyboard.h>

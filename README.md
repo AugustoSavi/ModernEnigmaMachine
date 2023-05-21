@@ -5,7 +5,7 @@
 [![Watch the video](https://user-images.githubusercontent.com/32443720/201154283-ecf50440-0964-4207-ac31-1d5e1d04e25c.png)](https://youtu.be/Wa5P3EffBTg)
 
 <h2 align="center">PITCH</h2>
-Ola meu nome é augusto, sendo a segurança e privacidade do usuario na internet um topico cada vez mais importante nos dias atuais.
+Sendo a segurança e privacidade do usuario na internet um topico cada vez mais importante nos dias atuais.
 
 justamente pelo grande aumento do uso de computadores com internet e muitos serviços sendo disponibilizados online,
 como exemplo os comunicadores instantaneos: whatsapp, telegram, messenger...
@@ -29,6 +29,12 @@ porem no caso de quem recebe a mensagem existiria um programa em que você cola 
 
 Yubico
 
+keyscrambler
+
+https://www.techtudo.com.br/noticias/2011/06/novo-teclado-sem-fio-da-microsoft-com-sistema-de-criptografia.ghtml
+
+https://forum.adrenaline.com.br/threads/review-teclado-mecanico-wireless-matias-secure-pro.527253/
+
 ### keyMap abnt2 
 
 https://www.hackeduca.com.br/ligando-um-teclado-ps2-ao-arduino/
@@ -51,10 +57,61 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [x] selecionar criptografia (rot47)
 - [x] criptografar mensagem no modo encrypt
 - [x] descriptografar mensagem no modo decrypt
-- [x] colocar todos os comentarios e variaveis em inglês
+- [ ] colocar todos os comentarios e variaveis em inglês
 - [ ] fazer comandos compinados funcionar (ctrl + a)
 
 ### bugs a serem resolvidos
 - [x] troca de modo do programa
 - [x] decrypt not working
 - [x] Quando clica varias vezes rapidamente esta escrevendo o texto invés de realizar a ação
+
+<h1 align="center">Arquitetura do projeto</h1>
+
+![arquitetura](images/arquitetura.png)
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h1 align="center">Exemplos de utilização</h1>
+
+<h3 align="center">Sem o middleware</h3>
+
+![log1](images/mensagens_sem_middleware/log-1/2023-05-14%2000:17:14.672851.png)
+
+<h3 align="center">Com o middleware</h3>
+
+![log1](images/mensagens_com_middleware/log-1/2023-05-14%2001:27:24.596708.png)
+
+
+<h3 align="center">Sem o middleware</h3>
+
+![log2](images/mensagens_sem_middleware/log-2/2023-05-14%2000:18:00.963768.png)
+
+<h3 align="center">Com o middleware</h3>
+
+![log2](images/mensagens_com_middleware/log-2/2023-05-14%2001:28:24.731790.png)
+
+<h3 align="center">Sem o middleware</h3>
+
+![log2](images/mensagens_sem_middleware/log-3/2023-05-14%2000:24:25.820404.png)
+
+<h3 align="center">Com o middleware</h3>
+
+![log2](images/mensagens_com_middleware/log-2/2023-05-14%2001:28:24.731790.png)
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<h1 align="center">Imagens da Poc</h1>
+
+![1](images/middleware/1.jpg)
+![1](images/middleware/2.jpg)
+![1](images/middleware/3.jpg)
+![1](images/middleware/4.jpg)
+![1](images/middleware/5.jpg)
+![1](images/middleware/6.jpg)
