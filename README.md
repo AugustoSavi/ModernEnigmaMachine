@@ -64,6 +64,7 @@ https://icon-icons.com/pt/icone/para-os-olhos-oculto-invis%C3%ADvel/111380
 - [x] troca de modo do programa
 - [x] decrypt not working
 - [x] Quando clica varias vezes rapidamente esta escrevendo o texto invés de realizar a ação
+- [ ] remover limitação de utilização de somente caracteres ascii
 
 <h1 align="center">Arquitetura do projeto</h1>
 
