@@ -51,7 +51,33 @@ Na outra extremidade, onde a mensagem é recebida, seria necessário um disposit
 
 ![Arquitetura](images/arquitetura.png)
 
-# Exemplos de utilização
+
+# Imagem do software do computador
+
+![Imagem da aplicação no computador](images/aplicacao.png)
+
+<br>
+<br>
+<br>
+
+<details>
+<summary><h1>Imagens do hardware</h1></summary>
+
+![1](images/middleware/1.jpg)
+![2](images/middleware/2.jpg)
+![3](images/middleware/3.jpg)
+![4](images/middleware/4.jpg)
+![5](images/middleware/5.jpg)
+![6](images/middleware/6.jpg)
+
+</details>
+
+<br>
+<br>
+<br>
+
+<details>
+<summary><h1>Imagens da utilização</h1></summary>
 
 ## Sem o middleware
 
@@ -77,15 +103,4 @@ Na outra extremidade, onde a mensagem é recebida, seria necessário um disposit
 
 ![Log 3](images/mensagens_com_middleware/log-2/2023-05-14%2001:28:24.731790.png)
 
-# Imagens da aplicação
-
-![Imagem da aplicação no computador](images/aplicacao.png)
-
-# Imagens do hardware
-
-![1](images/middleware/1.jpg)
-![2](images/middleware/2.jpg)
-![3](images/middleware/3.jpg)
-![4](images/middleware/4.jpg)
-![5](images/middleware/5.jpg)
-![6](images/middleware/6.jpg)
+</details>
