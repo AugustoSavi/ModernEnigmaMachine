@@ -8,8 +8,14 @@ from Arduino import Arduino
 
 arduino = Arduino()
 
+
 class Application:
     def __init__(self):
+        self.textBox = None
+        self.buttonSend = None
+        self.programModeButton = None
+        self.selectSerialPort = None
+        self.startThreading = None
         self.root = Tk()
         self.screen()
         self.inputs()
@@ -29,7 +35,8 @@ class Application:
         self.selectSerialPort.place(relx=0.02, rely=0.05, width=250, height=20)
         self.update_combobox_values()
 
-        self.selectSerialPort.bind("<<ComboboxSelected>>", lambda event: self.callbackFunctionPort(self.selectSerialPort.get()))
+        self.selectSerialPort.bind("<<ComboboxSelected>>",
+                                   lambda event: self.callbackFunctionPort(self.selectSerialPort.get()))
 
         # select the mode
         self.programModeButton = ttk.Combobox(self.root, values=arduino.programModes)
@@ -43,7 +50,7 @@ class Application:
 
     def update_combobox_values(self):
         ports = Arduino.find_serial_ports(arduino)
-        if(ports):
+        if ports:
             port_names = [port for port in ports]
             self.selectSerialPort['values'] = port_names
             if len(port_names) > 0:
@@ -92,7 +99,6 @@ class Application:
         self.startThreading = multiprocessing.Process(
             target=arduino.listenSerialPort)
         self.startThreading.start()
-
 
 
 Application()
