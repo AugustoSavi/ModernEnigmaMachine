@@ -1,6 +1,7 @@
 import serial, pyautogui
 import serial.tools.list_ports
 from tkinter import messagebox
+from pyautogui import press, write
 
 
 class Arduino:
@@ -9,6 +10,7 @@ class Arduino:
         self.serialPort = None
         self.serialPorts = self.getSerialPorts()
         self.serialPortInput = ''
+        self.assentosKeys = ['´', '`', '^', '~']
         self.programModes = ['Normal Keyboard', 'encrypt', 'decrypt']
         self.keysAccepts = ["[ESC]", "[Enter]", "[PgDn]", "[PgUp]", "[Left]", "[Right]", "[Up]", "[Down]", "[Backspace]","[Tab]"]
 
@@ -60,7 +62,11 @@ class Arduino:
                 break
 
         if self.serialPortInput:
-            pyautogui.write(self.serialPortInput)
+            for char in self.serialPortInput:
+                if char not in self.assentosKeys:
+                    write(char)
+                else:
+                    press(char, presses=2)
             self.serialPortInput = ''
 
         return self.serialPortInput
