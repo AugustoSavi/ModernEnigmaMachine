@@ -29,7 +29,7 @@ class KbdRptParser : public KeyboardReportParser
     void normalKeyboard(uint8_t mod, uint8_t key);
     void encrypt(uint8_t mod, uint8_t key);
     void printLCD(String message);
-    char rot47(char *s);
+    String rot47(String input);
     void setScrollNumber(int number, int lengthString);
 
   protected:
@@ -110,9 +110,7 @@ void KbdRptParser::encrypt(uint8_t mod, uint8_t key)
   switch (key) {
     // check for some of the special keys
     case ENTER_KEYBOARD:
-      str = message.c_str();
-      rot47(str);
-      Serial.print(message);
+      Serial.print(rot47(message));
       message = "";
       lcd.clear();
       break;
@@ -136,19 +134,22 @@ void KbdRptParser::encrypt(uint8_t mod, uint8_t key)
   }
 }
 
-char KbdRptParser::rot47(char* s)
-{
-  char* p = s;
-  while (*p)
-  {
-    if (*p >= '!' && *p <= 'O')
-      *p = ((*p - '!') + 47) % 94 + '!';
-    else if (*p >= 'P' && *p <= '~')
-      *p = ((*p - '!') + 47) % 94 + '!';
-    p++;
+String KbdRptParser::rot47(String input) {
+  String table = "`!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_abcdefghijklmnopqrstuvwxyz{|}~";
+  String output = "";
+
+  for (char& _char : input) {
+    int index = table.indexOf(_char);
+    if (index != -1) { // Se o caractere estiver na tabela
+      output += table[(index + 47) % 94]; // Deslocar 47 posições
+    } else {
+      output += _char; // Se o caractere não estiver na tabela, não altera
+    }
   }
-  return s;
+
+  return output;
 }
+
 
 
 void KbdRptParser::setScrollNumber(int number, int lengthString)
@@ -228,24 +229,24 @@ void showMessageLcd(String message)
 void decryptMessage(String message_will_be_decrypt)
 {
   lcd.clear();
-  str = message_will_be_decrypt.c_str();
-  rot47_underscore(str);
-  message = String(str);
+  message = rot47_decode(message_will_be_decrypt);
   printLCD(message);
 }
 
-char* rot47_underscore(char* s)
+String rot47_decode(String input)
 {
-  char* p = s;
-  while (*p)
-  {
-    if (*p >= '!' && *p <= 'O')
-      *p = ((*p - '!') + 47) % 94 + '!';
-    else if (*p >= 'P' && *p <= '~')
-      *p = ((*p - '!') + 47) % 94 + '!';
-    p++;
+  String table = "`!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_abcdefghijklmnopqrstuvwxyz{|}~";
+  String output = "";
+
+  for (char& _char : input) {
+    int index = table.indexOf(_char);
+    if (index != -1) { // Se o caractere estiver na tabela
+      output += table[(index + 47) % 94]; // Deslocar 47 posições
+    } else {
+      output += _char; // Se o caractere não estiver na tabela, não altera
+    }
   }
-  return s;
+  return output;
 }
 
 void showMode()
