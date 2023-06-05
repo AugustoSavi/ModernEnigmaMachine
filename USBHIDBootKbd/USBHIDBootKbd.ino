@@ -301,6 +301,7 @@ void loop()
     messagemInput = Serial.readString();
     if (messagemInput.substring(0, 6) == "[MODE]")
     {
+      message = "";
       modeProgram = messagemInput.substring(6, 7).toInt();
       showMode();
     }
