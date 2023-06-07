@@ -126,7 +126,9 @@ void KbdRptParser::encrypt(uint8_t mod, uint8_t key)
       break;
     default:
       if (c) {
-        message += (char)c;
+        if(message.length() <= 200){
+          message += (char)c;
+        }
       }
       break;
   }
