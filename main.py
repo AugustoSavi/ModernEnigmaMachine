@@ -29,7 +29,8 @@ class Application:
         # select arduino port
         self.selectSerialPort = ttk.Combobox(self.root, values=arduino.serialPorts)
         self.selectSerialPort.place(relx=0.02, rely=0.05, width=250, height=20)
-        self.selectSerialPort.current(0)
+        if(len(arduino.serialPorts) > 0):
+            self.selectSerialPort.current(0)
         self.selectSerialPort.bind("<<ComboboxSelected>>", lambda event: self.callbackFunctionPort(self.selectSerialPort.get()))
 
         # select the mode
@@ -60,7 +61,7 @@ class Application:
 
     # function for quit the window
     def quit_window(self, icon):
-        if self.startThreading.is_alive():
+        if len(arduino.serialPorts) > 0 and self.startThreading.is_alive():
             self.startThreading.terminate()
 
         icon.stop()
@@ -80,10 +81,11 @@ class Application:
         icon.run()
 
     def initListener(self):
-        arduino.connectSerialPort(self.selectSerialPort.get())
-        self.startThreading = multiprocessing.Process(
-            target=arduino.listenSerialPort)
-        self.startThreading.start()
+        if (len(arduino.serialPorts) > 0):
+            arduino.connectSerialPort(self.selectSerialPort.get())
+            self.startThreading = multiprocessing.Process(
+                target=arduino.listenSerialPort)
+            self.startThreading.start()
 
 
 Application()
