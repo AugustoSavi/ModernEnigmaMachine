@@ -1,7 +1,7 @@
 #include <hidboot.h>
 #include <LiquidCrystal_I2C.h>
 
-#define I2C_ADDR 0x27 // Arduino COM SHIELD
+#define I2C_ADDR 0x27
 
 #define UPARROW_KEYBOARD 82
 #define RIGTHARROW_KEYBOARD 79
@@ -12,8 +12,7 @@
 #define TAB_KEYBOARD 43
 #define ESC_KEYBOARD 41
 
-LiquidCrystal_I2C lcd(I2C_ADDR, 16, 2); // set the LCD address to 0x27 for a 16 chars and 2 line display
-
+LiquidCrystal_I2C lcd(I2C_ADDR, 16, 2);
 String message = "", messagemInput = "";
 const char *str;
 
@@ -71,7 +70,6 @@ void KbdRptParser::normalKeyboard(uint8_t mod, uint8_t key)
   uint8_t c = OemToAscii(mod, key);
 
   switch (key) {
-    // check for some of the special keys
     case ENTER_KEYBOARD:
       Serial.print("[Enter]");
       break;
@@ -108,7 +106,6 @@ void KbdRptParser::encrypt(uint8_t mod, uint8_t key)
 {
   uint8_t c = OemToAscii(mod, key);
   switch (key) {
-    // check for some of the special keys
     case ENTER_KEYBOARD:
       Serial.print(rot47(message));
       message = "";
@@ -119,6 +116,7 @@ void KbdRptParser::encrypt(uint8_t mod, uint8_t key)
       break;
     case RIGTHARROW_KEYBOARD:
       setScrollNumber(1, message.length());
+      break;
     case DELETE_KEYBOARD:
       if (message.length() > 0)
       {
@@ -140,10 +138,10 @@ String KbdRptParser::rot47(String input) {
 
   for (char& _char : input) {
     int index = table.indexOf(_char);
-    if (index != -1) { // Se o caractere estiver na tabela
-      output += table[(index + 47) % 94]; // Deslocar 47 posições
+    if (index != -1) {
+      output += table[(index + 47) % 94];
     } else {
-      output += _char; // Se o caractere não estiver na tabela, não altera
+      output += _char;
     }
   }
 
@@ -240,10 +238,10 @@ String rot47_decode(String input)
 
   for (char& _char : input) {
     int index = table.indexOf(_char);
-    if (index != -1) { // Se o caractere estiver na tabela
-      output += table[(index + 47) % 94]; // Deslocar 47 posições
+    if (index != -1) {
+      output += table[(index + 47) % 94];
     } else {
-      output += _char; // Se o caractere não estiver na tabela, não altera
+      output += _char;
     }
   }
   return output;
@@ -270,14 +268,13 @@ void showMode()
 
 USB     Usb;
 HIDBoot<USB_HID_PROTOCOL_KEYBOARD>    HidKeyboard(&Usb);
-
 KbdRptParser Prs;
 
 void setup()
 {
   Serial.begin( 115200 );
 #if !defined(__MIPSEL__)
-  while (!Serial); // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
+  while (!Serial);
 #endif
   Serial.println("Start");
 
@@ -286,7 +283,7 @@ void setup()
 
   delay( 200 );
 
-  lcd.begin(); // initialize the lcd
+  lcd.begin();
   lcd.backlight();
   lcd.clear();
   showMode();
